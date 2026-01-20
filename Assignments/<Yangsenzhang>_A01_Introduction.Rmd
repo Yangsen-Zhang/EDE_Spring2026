@@ -1,0 +1,56 @@
+---
+title: "Assignment 1: Introduction"
+author: "Yangsen Zhang"
+output: pdf_document
+---
+
+## OVERVIEW
+
+This exercise accompanies the introductory material in Environmental Data Analytics. 
+
+## Directions
+1.  Rename this file `<FirstLast>_A01_Introduction.Rmd` (replacing `<FirstLast>` with your first and last name).
+2.  Change "Student Name" on line 3 (above) with your name.
+4.  Be sure to **answer the questions** in this assignment document.
+5.  When you have completed the assignment, **Knit** the text and code into a single PDF file.
+6.  After Knitting, submit the completed exercise (PDF file) to the appropriate assignment section on Canvas.
+
+7.  Initial here to acknowledge that you did not use AI at all in completing this assignment: ___
+
+---
+
+## 1) Concept and Discussion Questions
+Enter answers to the questions just below the >Answer: prompt.
+
+1. What are your previous experiences with data analytics, R, and Git? Include both formal and informal training.
+
+> Answer: I have briefly learned the concept of R and made diagrams in my undergraduate studies, but I don't know much about Git.
+
+2. Are there any components of the course about which you feel confident?
+
+> Answer: I feel confident in the basic concepts covered so far.
+
+3. Are there any components of the course about which you feel apprehensive?
+
+> Answer: I feel apprehensive in the practical components of the course, I think I may learn how to do it from the professor, but I don't know how to apply it to other places where I may use R..
+
+4. Describe a dataset you have used in the past. Explain whether it was a primary or secondary dataset. 
+
+> Answer:In the past, I have worked with firm-level data on Chinese listed companies obtained from the Wind database. The dataset included variables such as annual revenue, employee shareholding information and so on. This was a secondary dataset, as the data were collected and maintained by Wind based on firms’ mandatory financial disclosures rather than generated directly by me.
+
+5. Would you describe the day of the month as a nominal, ordinal, interval, or ratio number? Explain your reasoning.
+
+> Answer: The day of the month are best described using ordinal. First, they have a clear order (the 2nd comes after the 1st). Second, they cannot be intervals, because although March 30th and March 31st are one day apart, when crossing months, March 31st and April 1st differ by 30 in numbers but are only one day apart, so the numerical difference no longer represents the actual time difference. Third, they cannot be ratios, because zero has no meaning here (there is no "0th day").
+
+---
+
+## 2) GitHub
+
+Provide a link below to your forked course repository in GitHub. Make sure you have pulled all recent changes from the course repository and that you have updated your course README file, committed those changes, and pushed them to your GitHub account. 
+
+> Answer: 
+
+---
+
+## 3) Knitting
+When you have completed this document, click the `knit` button.This should produce a PDF copy of your markdown document. Submit this PDF to Canvas 
