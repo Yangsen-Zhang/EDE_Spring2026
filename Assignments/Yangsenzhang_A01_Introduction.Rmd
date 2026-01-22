@@ -32,7 +32,7 @@ Enter answers to the questions just below the >Answer: prompt.
 
 3. Are there any components of the course about which you feel apprehensive?
 
-> Answer: I feel apprehensive in the practical components of the course, I think I may learn how to do it from the professor, but I don't know how to apply it to other places where I may use R..
+> Answer: I feel apprehensive in the practical components of the course, I think I may learn how to do it from the professor, but I don't know how to apply it to other places where I may use R.
 
 4. Describe a dataset you have used in the past. Explain whether it was a primary or secondary dataset. 
 
@@ -48,7 +48,7 @@ Enter answers to the questions just below the >Answer: prompt.
 
 Provide a link below to your forked course repository in GitHub. Make sure you have pulled all recent changes from the course repository and that you have updated your course README file, committed those changes, and pushed them to your GitHub account. 
 
-> Answer: 
+> Answer: https://github.com/Yangsen-Zhang/EDE_Spring2026
 
 ---
 
