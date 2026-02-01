@@ -41,7 +41,7 @@ This exercise accompanies the lessons in Environmental Data Analytics on Data Ex
 * Include the appropriate subcommand to read in character based columns as factors
 
 
-```{r,  message = FALSE}
+```{r, set up, message = FALSE}
 # load required packages
 library(tidyverse)
 library(here)
@@ -62,24 +62,22 @@ Litter <- read.csv(file = here("Data","Raw","NEON_NIWO_Litter_massdata_2018-08_r
 
 > Answer: We might be interested in the ecotoxicology of neonicotinoids on insects because although these pesticides are effective against pests, they may also harm other non-target insect species, such as bees. Understanding this can help us understand their role in ecosystems and others.
 
-
 3.  The Niwot Ridge litter and woody debris dataset was collected from the National Ecological Observatory Network, which collectively includes 81 aquatic and terrestrial sites across 20 ecoclimatic domains. 32 of these sites sample forest litter and woody debris, and we will focus on the Niwot Ridge long-term ecological research (LTER) station in Colorado. Why might we be interested in studying litter and woody debris that falls to the ground in forests? Feel free to do a brief internet search if you feel you need more background information. (AI is allowed here, but put answers in your own words.)
 
-> Answer:Litter and woody debris that falls to the ground in forests is crucial to carbon and nutrient cycle and soil health, because when leaves, branches and other plant substances fall and decompose, they will release the necessary nutrients back to the soil to support diversified decomposer communities. They also help to maintain soil moisture, prevent erosion, and play a role in the carbon cycle. Studying these processes in long-term research sites such as Niwater Ridge helps us understand how forest ecosystems work and respond to environmental changes. These indicators can help us assess forest's overall function and health in a Changing world.
+> Answer:Litter and woody debris that falls to the ground in forests is crucial to carbon and nutrient cycle and soil health, because when leaves, branches and other plant substances fall and decompose, they will release the necessary nutrients back to the soil to support diversified decomposer communities. They also help to maintain soil moisture, prevent erosion, and play a role in the carbon cycle. Studying these processes helps us understand how forest ecosystems work and respond to environmental changes. These indicators can help us assess forest's overall function and health in a changing world.
 
 4.  How is litter and woody debris sampled as part of the NEON network? Read the NEON_Litterfall_UserGuide.pdf document to learn more. List three pieces of salient information about the sampling methods here:
 
 > Answer: 
  1.Sampling is conducted using elevated and ground traps
  2.Trap placement within plots may be either targeted or randomized, depending on the vegetation
- 3. The sampling schedule depends on the trap type and the ecosystem. Ground traps are sampled only once per year. Elevated litter traps are sampled more frequently, but the rate varies
-
+ 3.The sampling schedule depends on the trap type and the ecosystem. Ground traps are sampled only once per year. Elevated litter traps are sampled more frequently, but the rate varies
 
 ## Obtain basic summaries of your data (Neonics)
 
 5.  What are the dimensions of the dataset?
 
-```{r}
+```{r Neonics dimensions}
 dim(Neonics)
 
 ```
@@ -88,7 +86,7 @@ This dataset contains 4623 observations and 30 variables.
 
 6.  Using the `summary` function on the "Effect" column, determine the most common effects that are studied.  [Tip: The `sort()` command is useful for listing the values in order of magnitude...]
 
-```{r}
+```{r Neonics Effect summary sort}
 # What class is the Effect column now?
 class(Neonics$Effect)
 
@@ -100,14 +98,14 @@ sort(summary(Neonics$Effect), decreasing = TRUE)
 
 ```
 
-Based on the summary of the Effect column, Population is the most commonly studied effect.
+Based on the summary of the Effect column, Population is the most commonly studied effect, followed by mortality and behavior.
 
 Question: Which two effects stand out as the most studied? Can you guess why these effects might specifically be of interest?
-> Answer: The two most commonly studied effects are population and mortality. Population are of particular interest because changes in a population are offen the most direct response to the environmental changes, such as pollution, climate change and so on. Studying mortality may help to find the reasons of population decline, it is useful to protect species.
+> Answer: The two most commonly studied effects are population and mortality. Population are of particular interest because changes in a population are often the most direct response to the environmental changes, such as pollution, climate change and so on. Studying mortality may help to find the reasons of population decline, it is useful to protect species.
 
 7.  Using the `summary` function, determine the six most commonly studied species in the dataset (common name).[TIP: Explore the help on the `summary()` function, in particular the `maxsum` argument...]
 
-```{r}
+```{r Neonics Species top6}
 summary(Neonics$Species.Common.Name, maxsum = 7)
 
 ```
@@ -119,7 +117,7 @@ Question: What do these species have in common? Why might they be of interest ov
 
 8.  The `Conc.1..Author` column, which lists the concentration of the neonicitoid dose, should include numeric values. What is the class of `Conc.1..Author.` column in the dataset, and why is it not numeric? [Tip: Viewing the dataframe may be helpful...]
 
-```{r}
+```{r Neonics Conc.1..Author class check}
 # check the class of `Conc.1..Author.`
 class(Neonics$Conc.1..Author)
 # View the first few values
@@ -127,13 +125,13 @@ head(Neonics$Conc.1..Author)
 
 ```
 
-> Answer:This column is stored as a factor rather than a numeric varaible, That's because this column contains non-numeric values such as "<0.0004" "NR".
+> Answer:This column is stored as a factor rather than a numeric variable, That's because this column contains non-numeric values such as "<0.0004" "NR".
 
 ## Explore your data graphically (Neonics)
 
 9.  Using `geom_freqpoly`, generate a plot of the number of studies conducted by publication year.
 
-```{r}
+```{r Neonics freqpoly Publication.Year}
 # Plot number of studies by publication year
 ggplot(Neonics,aes(x = Publication.Year)) +
   geom_freqpoly(binwidth =1, color = "black", linewidth = 1) +
@@ -144,22 +142,21 @@ ggplot(Neonics,aes(x = Publication.Year)) +
 
 10. Reproduce the same graph but now add a color aesthetic so that different Test.Location are displayed as different colors.
 
-```{r}
+```{r Neonics freqpoly Publication.Year by location}
 # Plot number of studies by publication year
-ggplot(Neonics, aes(x = Publication.Year, color = Media.Type)) +
+ggplot(Neonics, aes(x = Publication.Year, color = Test.Location)) +
   geom_freqpoly(binwidth =1, linewidth = 1) +
   labs( x = "Publication Year", y = "Numbers of Studies")
 ```
 
-
 Interpret this graph. What are the most common test locations, and do they differ over time?
-> Answer:The most common test location is No substrate. It shows a major surge in studies starting around the year 2000, peaking around 2010-2015, and then beginning a decline. Test locations do differ over time.
+> Answer:The most common test location is Lab.The relative importance of test locations changes over time, with laboratory-based studies becoming increasingly dominant in later years
 
 11. Create a bar graph of Endpoint counts. 
 
 [**TIP**: Add `theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))` to the end of your plot command to rotate and align the X-axis labels...]
 
-```{r}
+```{r Neonics barplot endpoint}
 # Create a bar graph of Endpoint counts.
 ggplot(Neonics,aes(x = Endpoint)) +
   geom_bar() +
@@ -177,7 +174,7 @@ No-observable-effect-level(NOEL) is the highest dose (concentration) producing e
 
 12. Determine the class of `collectDate`. Is it a date? If not, change to a date and confirm the new class of the variable. Using the `unique` function, determine which dates litter was sampled in August 2018.
 
-```{r}
+```{r Litter collectDate class}
 # check the class
 class(Litter$collectDate)
 # view the first few values of collectDate
@@ -197,18 +194,18 @@ unique(Litter$collectDate)
 
 13. Using the `unique` function, list the different `plotIDs` sampled at Niwot Ridge. 
 
-```{r}
+```{r Litter plotIDs unique}
 # list the different `plotIDs` sampled at Niwot Ridge
 unique(Litter$plotID)
 
 ```
 
 How is the information obtained from `unique` different from that obtained from `summary`?
-> Answer:Unique function returns to a list of all distinct plotIDs in the dataset, while summary function summarizes the data bt showing the frequency of observations for each plotID.
+> Answer:Unique function returns to a list of all distinct plotIDs in the dataset, while summary function summarizes the data by showing the frequency of observations for each plotID.
 
 14. Create a bar graph of `functionalGroup` counts. This shows you what type of litter is collected at the Niwot Ridge sites. Notice that litter types are fairly equally distributed across the Niwot Ridge sites.
 
-```{r}
+```{r Litter Barplot functionalGroup}
 # create a bar graph of `functionalGroup` counts
 ggplot(Litter,aes(x = functionalGroup)) +
   geom_bar() 
@@ -217,7 +214,7 @@ ggplot(Litter,aes(x = functionalGroup)) +
 
 15. Using `geom_boxplot` and `geom_violin`, create a boxplot and a violin plot of `dryMass` by `functionalGroup`.
 
-```{r}
+```{r Litter boxplot violin plot dryMass functionalGroup}
 # create a boxplot
 ggplot(Litter,aes(x = functionalGroup,y = dryMass)) +
   geom_boxplot()
