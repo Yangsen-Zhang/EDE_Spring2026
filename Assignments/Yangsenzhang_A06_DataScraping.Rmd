@@ -139,8 +139,7 @@ ggplot(durham_2024, aes(x = month, y = max_day_mgd, group = 1)) +
   geom_point() +
   labs(
     x = "Month",
-    y = "Maximum Day Use (MGD)",
-    title = "Durham (2024): Max Daily Withdrawals by Month"
+    y = "Maximum Day Use (MGD)"
   )
 
 ```
@@ -163,10 +162,10 @@ scrape_lwsp <- function(PWSID, year){
 
   webpage <- read_html(url)
 
-  # helper for label-value cells using XPath
   get_value <- function(label){
     webpage %>%
-      html_element(xpath = paste0("//td[normalize-space()='", label, "']/following-sibling::td[1]")) %>%
+      html_element(xpath = paste0("//td[normalize-space()='", 
+                                  label, "']/following-sibling::td[1]")) %>%
       html_text(trim = TRUE)
   }
 
@@ -174,11 +173,8 @@ scrape_lwsp <- function(PWSID, year){
   contact_person <- get_value("Contact Person:")
   ownership <- get_value("Ownership:")
 
-  # extract monthly max day use from body text (base R)
   page_txt <- webpage %>%
-    html_element("body") %>%
-    html_text(trim = TRUE)
-  page_txt <- gsub("\\s+", " ", page_txt)
+  html_text(trim = TRUE)
 
   md_mat <- regmatches(
     page_txt,
@@ -210,8 +206,6 @@ scrape_lwsp <- function(PWSID, year){
       date = as.Date(sprintf("%d-%02d-01", year, month_num))
     ) %>%
     arrange(month)
-
-  return(df)
 }
 
 ```
@@ -228,7 +222,6 @@ ggplot(durham_2020, aes(x = month, y = max_day_mgd, group = 1)) +
   labs(
     x = "Month",
     y = "Maximum Day Use (MGD)",
-    title = "Durham (2020): Max Daily Withdrawals by Month"
   )
 
 glimpse(durham_2020)
@@ -251,8 +244,7 @@ ggplot(compare_2020, aes(x = month, y = max_day_mgd, color = city, group = city)
   geom_point() +
   labs(
     x = "Month",
-    y = "Maximum Day Use (MGD)",
-    title = "Max Daily Withdrawals (2020): Cary vs Durham"
+    y = "Maximum Day Use (MGD)"
   )
 
 ```
